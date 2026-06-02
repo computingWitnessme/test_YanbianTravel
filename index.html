@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>延边 · 长白山 | 三日行程规划</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --primary: #2d5a3d;
+    --primary-light: #4a8c5c;
+    --accent: #c9a96e;
+    --accent-light: #e8d5a3;
+    --text: #2c3e50;
+    --text-light: #6b7c8a;
+    --bg: #f8f6f0;
+    --card-bg: rgba(255,255,255,0.92);
+    --shadow: 0 8px 32px rgba(0,0,0,0.10);
+    --radius: 16px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans SC', -apple-system, 'PingFang SC', sans-serif;
+    color: var(--text);
+    line-height: 1.7;
+    background: var(--bg);
+  }
+
+  /* ===== Hero ===== */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    background: #1a2a1a;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(135deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.20) 50%, rgba(0,0,0,0.45) 100%),
+      url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1920&q=80') center/cover;
+    will-change: transform;
+    animation: heroZoom 20s ease-in-out infinite alternate;
+  }
+
+  @keyframes heroZoom {
+    0%   { transform: scale(1); }
+    100% { transform: scale(1.08); }
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.4) 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    max-width: 800px;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    padding: 6px 20px;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 100px;
+    color: rgba(255,255,255,0.85);
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(4px);
+  }
+
+  .hero h1 {
+    font-size: clamp(2.6rem, 7vw, 4.8rem);
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 6px;
+    line-height: 1.2;
+    text-shadow: 0 2px 40px rgba(0,0,0,0.3);
+  }
+
+  .hero h1 span { color: var(--accent); }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: rgba(255,255,255,0.8);
+    margin-top: 1rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+  }
+
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .hero-meta-item {
+    color: rgba(255,255,255,0.85);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .hero-meta-item svg {
+    width: 18px; height: 18px;
+    fill: var(--accent);
+  }
+
+  .scroll-down {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    animation: bounce 2s infinite;
+    cursor: pointer;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(8px);
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: 0.3s;
+  }
+
+  .scroll-down:hover { background: rgba(255,255,255,0.2); }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%      { transform: translateX(-50%) translateY(8px); }
+  }
+
+  .scroll-down svg {
+    width: 22px; height: 22px;
+    fill: #fff;
+  }
+
+  /* ===== Nav ===== */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    padding: 0 2rem;
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    list-style: none;
+    max-width: 900px;
+    margin: 0 auto;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  nav a {
+    display: block;
+    padding: 1rem 0;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    position: relative;
+    white-space: nowrap;
+    transition: 0.2s;
+  }
+
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--primary);
+    transition: 0.3s;
+  }
+
+  nav a:hover { color: var(--primary); }
+  nav a:hover::after { width: 100%; }
+
+  /* ===== Sections ===== */
+  section {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 4.5rem 2rem;
+  }
+
+  .section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-title h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary);
+  }
+
+  .section-title p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin-top: 0.4rem;
+  }
+
+  .section-title .line {
+    width: 50px; height: 3px;
+    background: var(--accent);
+    margin: 0.8rem auto 0;
+    border-radius: 2px;
+  }
+
+  /* ===== Overview ===== */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .overview-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255,255,255,0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .overview-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+  }
+
+  .overview-card .icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .overview-card .label {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    letter-spacing: 1px;
+  }
+
+  .overview-card .value {
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin-top: 0.2rem;
+  }
+
+  .overview-card.highlight {
+    background: var(--primary);
+    color: #fff;
+  }
+
+  .overview-card.highlight .label,
+  .overview-card.highlight .value { color: rgba(255,255,255,0.85); }
+
+  /* ===== Itinerary ===== */
+  .day-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(255,255,255,0.5);
+    transition: transform 0.3s;
+  }
+
+  .day-card:hover { transform: translateY(-3px); }
+
+  .day-header {
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+
+  .day-header.day1 { background: linear-gradient(135deg, #2d5a3d, #4a8c5c); }
+  .day-header.day2 { background: linear-gradient(135deg, #1a4a6e, #3a7abd); }
+  .day-header.day3 { background: linear-gradient(135deg, #7a4a2d, #b8834a); }
+
+  .day-header .day-label {
+    color: #fff;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .day-header .day-label strong {
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+
+  .day-weather {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255,255,255,0.9);
+    font-size: 0.9rem;
+  }
+
+  .day-weather .temp {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  .day-body { padding: 1.8rem 2rem; }
+
+  .time-item {
+    display: flex;
+    gap: 1.2rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px dashed rgba(0,0,0,0.06);
+  }
+
+  .time-item:last-child { border-bottom: none; }
+
+  .time-item .time {
+    flex-shrink: 0;
+    width: 70px;
+    font-weight: 500;
+    color: var(--primary);
+    font-size: 0.9rem;
+    padding-top: 2px;
+  }
+
+  .time-item .content { flex: 1; }
+
+  .time-item .content h4 {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+  }
+
+  .time-item .content p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+  }
+
+  .time-item .tag {
+    display: inline-block;
+    padding: 1px 10px;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-right: 6px;
+  }
+
+  .tag-traffic   { background: #e8f4e8; color: #2d5a3d; }
+  .tag-food      { background: #fef3e2; color: #b8834a; }
+  .tag-scenic    { background: #e4f0fa; color: #1a4a6e; }
+  .tag-stay      { background: #f0e8f8; color: #6a3d8a; }
+  .tag-tip       { background: #fef0f0; color: #b84a4a; }
+
+  /* ===== Tips ===== */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .tip-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255,255,255,0.5);
+  }
+
+  .tip-card h4 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary);
+  }
+
+  .tip-card p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+  }
+
+  /* ===== Footer ===== */
+  footer {
+    background: #1a2a1a;
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.85rem;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 640px) {
+    section { padding: 3rem 1.2rem; }
+    .day-header { padding: 1.2rem; }
+    .day-body { padding: 1.2rem; }
+    .time-item { flex-direction: column; gap: 0.3rem; }
+    .time-item .time { width: auto; }
+    .hero-meta { gap: 1.2rem; }
+    nav ul { gap: 1.5rem; }
+    nav a { font-size: 0.85rem; padding: 0.8rem 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ====== HERO ====== -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🗺️ 2026 · 盛夏启程</div>
+    <h1>延边 · <span>长白山</span></h1>
+    <p class="hero-sub">从海城出发，三日沉浸式旅途</p>
+    <div class="hero-meta">
+      <span class="hero-meta-item">
+        <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
+        6月13日 — 6月15日
+      </span>
+      <span class="hero-meta-item">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        辽宁省海城市 → 延边 · 长白山
+      </span>
+      <span class="hero-meta-item">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        高铁 · 美食 · 天池
+      </span>
+    </div>
+  </div>
+  <a class="scroll-down" href="#overview"><svg viewBox="0 0 24 24"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg></a>
+</section>
+
+<!-- ====== NAV ====== -->
+<nav>
+  <ul>
+    <li><a href="#overview">概览</a></li>
+    <li><a href="#day1">第一天 · 延吉</a></li>
+    <li><a href="#day2">第二天 · 长白山</a></li>
+    <li><a href="#day3">第三天 · 返程</a></li>
+    <li><a href="#tips">出行贴士</a></li>
+  </ul>
+</nav>
+
+<!-- ====== OVERVIEW ====== -->
+<section id="overview">
+  <div class="section-title">
+    <h2>行程概览</h2>
+    <p>三日沉浸式体验 · 山水与人文的交响</p>
+    <div class="line"></div>
+  </div>
+  <div class="overview-grid">
+    <div class="overview-card highlight">
+      <div class="icon">🚄</div>
+      <div class="label">出发地</div>
+      <div class="value">海城市 → 延吉西</div>
+    </div>
+    <div class="overview-card">
+      <div class="icon">📅</div>
+      <div class="label">行程</div>
+      <div class="value">三日 · 两晚</div>
+    </div>
+    <div class="overview-card">
+      <div class="icon">🌡️</div>
+      <div class="label">气温</div>
+      <div class="value">延吉 16~28°C</div>
+    </div>
+    <div class="overview-card">
+      <div class="icon">🏔️</div>
+      <div class="label">长白山</div>
+      <div class="value">天池 5~18°C</div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== DAY 1 ====== -->
+<section id="day1">
+  <div class="day-card">
+    <div class="day-header day1">
+      <div class="day-label">
+        <strong>第一天</strong> · 6月13日（周六）
+        <span style="font-weight:300;font-size:0.85rem;margin-left:6px;">延吉探索</span>
+      </div>
+      <div class="day-weather">
+        <span>☀️→⛅</span>
+        <span class="temp">16° ~ 26°C</span>
+        <span style="font-size:0.8rem;opacity:0.7;">微风 · 午后偶有云</span>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="time-item">
+        <div class="time">07:00-12:00</div>
+        <div class="content">
+          <h4><span class="tag tag-traffic">🚄 交通</span>海城 → 延吉西</h4>
+          <p>海城西站乘高铁至延吉西站（经沈阳换乘），全程约 5 小时。沿途穿越长白山脉，窗外绿意渐浓。</p>
+        </div>
+      </div>
+      <div class="time-item">
+        <div class="time">12:00-14:00</div>
+        <div class="content">
+          <h4><span class="tag tag-food">🍜 午餐</span>延吉冷面 & 石锅拌饭</h4>
+          <p>抵达后前往 <strong>服务大楼冷面</strong> 或 <strong>全州拌饭</strong>，体验最地道的延边朝鲜族美食。搭配一口冰爽的冷面汤，消暑开胃。</p>
+        </div>
+      </div>
+      <div class="time-item">
+        <div class="time">14:00-15:30</div>
+        <div class="content">
+          <h4><span class="tag tag-stay">🏨 入住</span>延吉市区酒店</h4>
+          <p>推荐延边大学周边或延吉百货大楼附近，交通便利、美食集中。安顿行李，稍作休整。</p>
+        </div>
+      </div>
+      <div class="time-item">
+        <div class="time">15:30-17:30</div>
+        <div class="content">
+          <h4><span class="tag tag-scenic">📸 游览</span>延边大学 & 网红墙</h4>
+          <p>漫步延边大学校园，感受朝鲜族文化与现代教育的融合。校门对面的 <strong>双语网红弹幕墙</strong> 是中朝双语的打卡圣地，随手一拍都是大片。</p>
+        </div>
+      </div>
+      <div class="time-item">
+        <div class="time">17:30-19:00</div>
+        <div class="content">
+          <h4><span class="tag tag-scenic">🏛️ 游览</span>延边博物馆</h4>
+          <p>系统了解延边朝鲜族的历史脉络与民俗文化，馆藏丰富，陈列精美，是快速读懂延边的最佳窗口。</p>
+        </div>
+      </div>
+      <div class="time-item">
+        <div class="time">19:00-21:00</div>
+        <div class="content">
+          <h4><span class="tag tag-food">🥩 晚餐</span>延吉韩式烧烤 & 夜市</h4>
+          <p>前往 <strong>丰茂串城</strong> 或 <strong>河坝串城</strong> 体验延边烧烤——炭火慢烤、蘸料丰富。餐后逛 <strong>延吉夜市</strong>，尝尝辣炒年糕、米酒和打糕。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== DAY 2 ====== -->
+<section id="day2">
+  <div class="day-card">
+    <div class="day-header day2">
+      <div class="day-label">
+        <strong>第二天</strong> · 6月14日（周日）
+        <span style="font-weight:300;font-size:0.85rem;margin-left:6px;">长白山朝圣</span>
+      </div>
+      <div class="day-weather">
+        <span>⛅→🌤️</span>
+        <span class="temp">8° ~ 18°C</span>
+        <span style="font-size:0.8rem;opacity:0.7;">山顶偏凉 · 建议带外套</span>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="time-item">
+        <div class="time">06:00-06:30</div>
+        <div class="content">
+          <h4><span class="tag tag-tip">💡 准备</span>早起出发</h4>
+          <p>延吉出发前往长白山北坡景区，车程约 2.5 小时。建议提前备好薄羽绒服/冲锋衣、雨衣（山顶风大，伞不便）。</p>
+        </div>
+      </div>
+      <div class="time-item">
+        <div class="time">06:30-09:00</div>
+        <div class="content">
+          <h4><span class="tag tag-traffic">🚗 交通</span>延吉 → 长白山北坡</h4>
+          <p>包车或自驾经珲乌高速、环山线，沿途森林、溪流相伴，空气清冽。在二道白河镇可停车品尝朝鲜族早餐。</p>
+        </div>
+      </div>
+      <div class="time-item">
+        <div class="time">09:00-12:00</div>
+        <div class="content">
+          <h4><span class="tag tag-scenic">🏔️ 核心</span>天池（主峰）</h4>
+          <p>景区换乘中心乘越野车登顶。6 月中旬天池冰面刚开始消融，蓝白交织、宛如仙境。能否看到天池全貌全凭缘分——但清晨登顶概率最高。<br>
+          <em style="font-size:0.82rem;color:#888;">※ 主峰气温 5~12°C，风力较大，务必穿防风外套。</em></p>
+        </div>
+      </div>
+      <div class="time-item">
+        <div class="time">12:00-13:00</div>
+        <div class="content">
+          <h4><span class="tag tag-food">🍱 午餐</span>景区简餐 / 温泉煮蛋</h4>
+          <p>在瀑布停车场品尝 <strong>长白山温泉煮鸡蛋</strong>（蛋黄凝固、蛋白呈半流质，口感独特），搭配玉米、香肠等简餐。</p>
+        </div>
+      </div>
+      <div class="time-item">
+        <div class="time">13:00-16:00</div>
+        <div class="content">
+          <h4><span class="tag tag-scenic">🌊 游览</span>长白瀑布 · 绿渊潭 · 地下森林</h4>
+          <p>
+            <strong>长白瀑布</strong> — 天池唯一的出水口，落差 68 米，声如雷鸣；<br>
+            <strong>绿渊潭</strong> — 一池碧水镶嵌于山谷，清澈见底，如翡翠般动人；<br>
+            <strong>地下森林</strong> — 火山喷发形成的谷底原始森林，漫步栈道感受大自然的力量。
+          </p>
+        </div>
+      </div>
+      <div class="time-item">
+        <div class="time">16:00-18:30</div>
+        <div class="content">
+          <h4><span class="tag tag-traffic">🚗 返程</span>返回延吉</h4>
+          <p>乘车返回延吉市区，沿途可在 <strong>二道白河镇</strong> 短暂停留，感受"长白山第一镇"的宁静之美。</p>
+        </div>
+      </div>
+      <div class="time-item">
+        <div class="time">19:00-21:00</div>
+        <div class="content">
+          <h4><span class="tag tag-food">🥟 晚餐</span>延吉参鸡汤 & 米酒</h4>
+          <p>推荐 <strong>张师傅参鸡汤</strong>，用童子鸡腹中填入糯米、人参炖煮，汤鲜肉嫩。搭配一杯延边 <strong>玛格丽米酒</strong>，解乏暖胃。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== DAY 3 ====== -->
+<section id="day3">
+  <div class="day-card">
+    <div class="day-header day3">
+      <div class="day-label">
+        <strong>第三天</strong> · 6月15日（周一）
+        <span style="font-weight:300;font-size:0.85rem;margin-left:6px;">文化拾遗 · 返程</span>
+      </div>
+      <div class="day-weather">
+        <span>☀️→⛅</span>
+        <span class="temp">17° ~ 27°C</span>
+        <span style="font-size:0.8rem;opacity:0.7;">晴好 · 午后或有阵雨</span>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="time-item">
+        <div class="time">08:00-09:30</div>
+        <div class="content">
+          <h4><span class="tag tag-food">🥟 早餐</span>延吉特色早餐</h4>
+          <p>来一碗热腾腾的 <strong>延吉牛肉汤饭</strong> 或 <strong>酱汤</strong>，配上现做的泡菜，开启元气满满的一天。</p>
+        </div>
+      </div>
+      <div class="time-item">
+        <div class="time">09:30-11:30</div>
+        <div class="content">
+          <h4><span class="tag tag-scenic">🏘️ 游览</span>朝鲜族民俗园</h4>
+          <p>穿行于青瓦白墙的朝鲜族传统民居间，可租一套韩服拍照留念。园内有传统工艺展示和歌舞表演，沉浸式体验朝鲜族文化。<br>
+          <em style="font-size:0.82rem;color:#888;">※ 距延吉市区约 15 分钟车程。</em></p>
+        </div>
+      </div>
+      <div class="time-item">
+        <div class="time">11:30-13:00</div>
+        <div class="content">
+          <h4><span class="tag tag-food">🍲 午餐</span>延边特色包饭 & 辣白菜</h4>
+          <p>推荐 <strong>元奶奶包饭</strong> 或 <strong>以勒包饭</strong>，用新鲜生菜包裹五花肉、米饭、蒜片和辣酱，一口吃下延边的味道。配菜中的辣白菜和桔梗不可错过。</p>
+        </div>
+      </div>
+      <div class="time-item">
+        <div class="time">13:00-14:00</div>
+        <div class="content">
+          <h4><span class="tag tag-scenic">🛍️ 采购</span>特产伴手礼</h4>
+          <p>前往延吉西市场，选购 <strong>朝鲜族泡菜、打糕、明太鱼干、延边大米</strong> 等地道特产，把延边的味道带回家。</p>
+        </div>
+      </div>
+      <div class="time-item">
+        <div class="time">14:00-15:00</div>
+        <div class="content">
+          <h4><span class="tag tag-tip">💡 预备</span>前往延吉西站</h4>
+          <p>返回酒店取行李，前往延吉西站，预留充足时间安检候车。</p>
+        </div>
+      </div>
+      <div class="time-item">
+        <div class="time">15:00-20:00</div>
+        <div class="content">
+          <h4><span class="tag tag-traffic">🚄 返程</span>延吉西 → 海城</h4>
+          <p>乘高铁返回海城西站，伴着夕阳回味三天的旅途。预计傍晚抵达，结束愉快的延边长白山之旅。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== TIPS ====== -->
+<section id="tips">
+  <div class="section-title">
+    <h2>出行贴士</h2>
+    <p>让旅途更顺心的实用建议</p>
+    <div class="line"></div>
+  </div>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <h4>🎒 装备建议</h4>
+      <p>长白山山顶气温仅 5~12°C，务必带一件冲锋衣或薄羽绒服。晴天紫外线强烈，防晒霜、墨镜不可少。山区天气多变，备好雨衣（山顶禁止打伞）。</p>
+    </div>
+    <div class="tip-card">
+      <h4>🚄 交通提示</h4>
+      <p>海城→延吉高铁建议提前 15 天购票（12306 开售）。延吉到长白山建议提前预约包车（约 300-400 元/车），也可在延吉客运站乘大巴至二道白河。</p>
+    </div>
+    <div class="tip-card">
+      <h4>🍽️ 美食推荐</h4>
+      <p>延吉必尝：冷面、石锅拌饭、韩式烧烤、参鸡汤、包饭、米酒、辣炒年糕、炸鸡。长白山必尝：温泉煮蛋、朝鲜族酱汤。</p>
+    </div>
+    <div class="tip-card">
+      <h4>🎫 门票信息</h4>
+      <p>长白山北坡景区门票 + 环保车约 225 元/人（提前在「长白山」公众号预约）。主峰越野车另付 80 元/人。学生证、老人证有优惠。</p>
+    </div>
+    <div class="tip-card">
+      <h4>🌤️ 天气提醒</h4>
+      <p>6 月中旬延边地区白天温暖舒适，但早晚温差较大（10°C 左右）。长白山天池能否看见取决于天气——雨后初晴概率最大。关注「长白山气象」公众号实时查询。</p>
+    </div>
+    <div class="tip-card">
+      <h4>🏨 住宿建议</h4>
+      <p>延吉推荐延边大学或百利城周边，美食多、交通方便。若想深度体验自然，第二天可住二道白河镇温泉酒店，第三天再返回延吉。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <p>🗺️ 延边 · 长白山 三日行程规划 ｜ 2026 年 6 月 13 日 — 6 月 15 日</p>
+  <p style="margin-top:0.5rem;font-size:0.78rem;">🚄 出发地：辽宁省海城市 ｜ 🌤️ 天气数据仅供参考 · 出行前请查询最新预报</p>
+</footer>
+
+</body>
+</html>
